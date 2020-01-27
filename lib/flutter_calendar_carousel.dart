@@ -113,6 +113,7 @@ class CalendarCarousel<T extends EventInterface> extends StatefulWidget {
   final ScrollPhysics customGridViewPhysics;
   final Function(DateTime) onCalendarChanged;
   final String locale;
+  final DateFormat localDateFormat;
   final int firstDayOfWeek;
   final DateTime minSelectedDate;
   final DateTime maxSelectedDate;
@@ -188,6 +189,7 @@ class CalendarCarousel<T extends EventInterface> extends StatefulWidget {
     this.customGridViewPhysics,
     this.onCalendarChanged,
     this.locale = "en",
+    this.localDateFormat,
     this.firstDayOfWeek,
     this.minSelectedDate,
     this.maxSelectedDate,
@@ -294,7 +296,7 @@ class _CalendarState<T extends EventInterface> extends State<CalendarCarousel<T>
       /// width percentage
     );
 
-    _localeDate = DateFormat.yMMM(widget.locale);
+    _localeDate = widget.localDateFormat ?? DateFormat.yMMM(widget.locale);
 
     if (widget.firstDayOfWeek == null)
       firstDayOfWeek = (_localeDate.dateSymbols.FIRSTDAYOFWEEK + 1) % 7;
